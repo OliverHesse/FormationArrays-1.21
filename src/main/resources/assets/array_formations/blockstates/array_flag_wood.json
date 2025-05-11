@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "array_formations:block/array_flag_wood"
+    },
+    "facing=south": {
+      "model": "array_formations:block/array_flag_wood",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "array_formations:block/array_flag_wood",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "array_formations:block/array_flag_wood",
+      "y": 270
+    }
+  }
+}

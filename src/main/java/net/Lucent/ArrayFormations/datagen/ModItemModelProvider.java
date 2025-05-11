@@ -17,5 +17,6 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.SPIRIT_STONE_DUST.get());
         basicItem(ModItems.SPIRIT_STONE_PASTE.get());
         basicItem(ModItems.SPIRIT_STONE.get());
+        basicItem(ModItems.CONDENSED_QI_BUCKET.get());
     }
 }

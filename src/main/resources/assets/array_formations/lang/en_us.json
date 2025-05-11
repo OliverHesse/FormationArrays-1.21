@@ -1,5 +1,17 @@
 {
   "item.array_formations.array_blueprint" : "Array Blueprint",
-  "block.array_formations.array_core": "Array Core",
+  "item.array_formations.spirit_stone" : "Spirit Stone",
+  "item.array_formations.spirit_stone_dust" : "Spirit Stone Dust",
+  "item.array_formations.spirit_stone_paste" : "Spirit Stone Paste",
+  "item.array_formations.condensed_qi_bucket" : "Condensed Qi Bucket",
+  "block.array_formations.mortal_formation_core": "Mortal Formation Core",
+  "block.array_formations.primal_formation_core": "Primal Formation Core",
+  "block.array_formations.array_flag_fire": "Fire Array Flag",
+  "block.array_formations.array_flag_earth": "Earth Array Flag",
+  "block.array_formations.array_flag_water": "Water Array Flag",
+  "block.array_formations.array_flag_metal": "Metal Array Flag",
+  "block.array_formations.array_flag_wood": "Wood Array Flag",
+
+
   "creativetab.array_formations.array_formation_items": "Array Formations"
 }

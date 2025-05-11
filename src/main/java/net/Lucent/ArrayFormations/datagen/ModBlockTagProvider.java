@@ -1,7 +1,7 @@
 package net.Lucent.ArrayFormations.datagen;
 
 import net.Lucent.ArrayFormations.ArrayFormationsMod;
-import net.Lucent.ArrayFormations.block.ModBlock;
+import net.Lucent.ArrayFormations.block.ModBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
@@ -20,10 +20,14 @@ public class ModBlockTagProvider extends BlockTagsProvider {
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .add(ModBlock.ARRAY_CORE.get());
+
+                .add(ModBlocks.MORTAL_FORMATION_CORE.get())
+                .add(ModBlocks.PRIMAL_FORMATION_CORE.get());
 
         tag(BlockTags.NEEDS_DIAMOND_TOOL)
-                .add(ModBlock.ARRAY_CORE.get());
+
+                .add(ModBlocks.MORTAL_FORMATION_CORE.get())
+                .add(ModBlocks.PRIMAL_FORMATION_CORE.get());
 
     }
 }

@@ -1,0 +1,6 @@
+
+-Bug Fixes-
+☐ Fix buggy sprites when opening menu
+
+
+-Planned Features-

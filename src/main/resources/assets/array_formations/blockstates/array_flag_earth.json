@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "array_formations:block/array_flag_earth"
+    },
+    "facing=south": {
+      "model": "array_formations:block/array_flag_earth",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "array_formations:block/array_flag_earth",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "array_formations:block/array_flag_earth",
+      "y": 270
+    }
+  }
+}

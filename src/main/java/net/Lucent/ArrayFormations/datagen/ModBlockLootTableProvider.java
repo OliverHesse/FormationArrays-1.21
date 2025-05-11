@@ -1,6 +1,6 @@
 package net.Lucent.ArrayFormations.datagen;
 
-import net.Lucent.ArrayFormations.block.ModBlock;
+import net.Lucent.ArrayFormations.block.ModBlocks;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -19,7 +19,9 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-        dropSelf(ModBlock.ARRAY_CORE.get());
+
+        dropSelf(ModBlocks.PRIMAL_FORMATION_CORE.get());
+        dropSelf(ModBlocks.MORTAL_FORMATION_CORE.get());
     }
 
 
@@ -28,6 +30,6 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
     @Override
     protected @NotNull Iterable<Block> getKnownBlocks(){
 
-        return ModBlock.BLOCKS.getEntries().stream().map(Holder::value)::iterator;
+        return ModBlocks.BLOCKS.getEntries().stream().map(Holder::value)::iterator;
     }
 }

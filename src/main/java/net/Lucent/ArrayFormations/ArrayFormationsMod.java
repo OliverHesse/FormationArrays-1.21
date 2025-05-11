@@ -1,9 +1,13 @@
 package net.Lucent.ArrayFormations;
 
-import net.Lucent.ArrayFormations.block.ModBlock;
+import net.Lucent.ArrayFormations.block.ModBlocks;
+import net.Lucent.ArrayFormations.block.entity.ModBlockEntities;
 import net.Lucent.ArrayFormations.item.ModCreativeModeTabs;
 import net.Lucent.ArrayFormations.item.ModItems;
+import net.Lucent.ArrayFormations.screen.ModMenuTypes;
+import net.Lucent.ArrayFormations.screen.custom.FormationCoreScreen;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -44,8 +48,9 @@ public class ArrayFormationsMod
         ModCreativeModeTabs.register(modEventBus);
 
         ModItems.register(modEventBus);
-        ModBlock.register(modEventBus);
-
+        ModBlocks.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
+        ModMenuTypes.register(modEventBus);
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (ExampleMod) to respond directly to events.
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
@@ -78,13 +83,7 @@ public class ArrayFormationsMod
     private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
 
-        if(event.getTabKey() == CreativeModeTabs.INGREDIENTS){
-            event.accept(ModItems.ARRAY_BLUEPRINT);
-        }
 
-        if(event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS){
-            event.accept(ModBlock.ARRAY_CORE);
-        }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
@@ -105,6 +104,10 @@ public class ArrayFormationsMod
             // Some client setup code
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+        }
+        @SubscribeEvent
+        public static void registerScreens(RegisterMenuScreensEvent event) {
+            event.register(ModMenuTypes.FORMATION_CORE_MENU.get(), FormationCoreScreen::new);
         }
     }
 }
