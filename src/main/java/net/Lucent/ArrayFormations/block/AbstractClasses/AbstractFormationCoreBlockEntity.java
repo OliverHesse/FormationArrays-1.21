@@ -1,6 +1,9 @@
 package net.Lucent.ArrayFormations.block.AbstractClasses;
 
+import net.Lucent.ArrayFormations.block.custom.FormationCoreBlock;
+import net.Lucent.ArrayFormations.item.custom.ArrayBlueprint;
 import net.Lucent.ArrayFormations.screen.custom.FormationCoreMenu;
+import net.Lucent.ArrayFormations.util.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -16,9 +19,13 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -35,6 +42,10 @@ public abstract class AbstractFormationCoreBlockEntity extends BlockEntity imple
 
     public abstract int MAX_ARRAY_BLUEPRINTS();
     public abstract double MAX_QI();
+    public double qiConsumptionRate = 0.0;
+
+
+
     public Map<Integer, Direction> arrayFlagDirections = new HashMap<Integer,Direction>();
 
     public AbstractFormationCoreBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
@@ -46,6 +57,7 @@ public abstract class AbstractFormationCoreBlockEntity extends BlockEntity imple
                 return stack.getMaxStackSize();
             }
 
+
             @Override
             protected void onContentsChanged(int slot) {
                 setChanged();
@@ -55,6 +67,7 @@ public abstract class AbstractFormationCoreBlockEntity extends BlockEntity imple
                 }
             }
         };
+
 
     }
 
@@ -113,6 +126,19 @@ public abstract class AbstractFormationCoreBlockEntity extends BlockEntity imple
         inventory.deserializeNBT(registries,tag.getCompound("inventory"));
         fuelInventory.deserializeNBT(registries,tag.getCompound("fuelInventory"));
 
+    }
+
+    public void tick(Level level, BlockPos blockPos, BlockState blockState) {
+        if(!level.isClientSide() && blockState.getValue(FormationCoreBlock.FORMATION_CORE_STATE)){
+            //is active run tick
+            System.out.println("RUNNING TICK FOR CORE WITH "+this.MAX_ARRAY_BLUEPRINTS()+ " Blueprint slots");
+            for(int slot = 0;slot < MAX_ARRAY_BLUEPRINTS();slot++){
+                if(inventory.getStackInSlot(slot).is(ModTags.Items.ARRAY_BLUEPRINT)){
+                    //try to call it
+                    ((ArrayBlueprint) inventory.getStackInSlot(slot).getItem()).executor.tick(level,blockPos,blockState);
+                }
+            }
+        }
     }
 
     @Nullable

@@ -4,10 +4,12 @@ import net.Lucent.ArrayFormations.block.ModBlocks;
 import net.Lucent.ArrayFormations.block.entity.ModBlockEntities;
 import net.Lucent.ArrayFormations.item.ModCreativeModeTabs;
 import net.Lucent.ArrayFormations.item.ModItems;
+import net.Lucent.ArrayFormations.network.ModPayloads;
 import net.Lucent.ArrayFormations.screen.ModMenuTypes;
 import net.Lucent.ArrayFormations.screen.custom.FormationCoreScreen;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -51,6 +53,7 @@ public class ArrayFormationsMod
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModMenuTypes.register(modEventBus);
+
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (ExampleMod) to respond directly to events.
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
@@ -109,5 +112,11 @@ public class ArrayFormationsMod
         public static void registerScreens(RegisterMenuScreensEvent event) {
             event.register(ModMenuTypes.FORMATION_CORE_MENU.get(), FormationCoreScreen::new);
         }
+
+        @SubscribeEvent
+        public static void registerPayloads(RegisterPayloadHandlersEvent event){
+            ModPayloads.registerPayloads(event);
+        }
+
     }
 }

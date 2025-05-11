@@ -1,5 +1,6 @@
 {
-  "item.array_formations.array_blueprint" : "Array Blueprint",
+  "item.array_formations.regen_array_blueprint" : "Regen Array Blueprint",
+  "item.array_formations.saturation_array_blueprint" : "Saturation Array Blueprint",
   "item.array_formations.spirit_stone" : "Spirit Stone",
   "item.array_formations.spirit_stone_dust" : "Spirit Stone Dust",
   "item.array_formations.spirit_stone_paste" : "Spirit Stone Paste",

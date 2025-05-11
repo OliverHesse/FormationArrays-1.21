@@ -4,6 +4,7 @@ import net.Lucent.ArrayFormations.block.AbstractClasses.AbstractFormationCoreBlo
 import net.Lucent.ArrayFormations.block.ModBlocks;
 
 import net.Lucent.ArrayFormations.screen.ModMenuTypes;
+import net.Lucent.ArrayFormations.util.ModTags;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -28,24 +29,28 @@ public class FormationCoreMenu extends AbstractContainerMenu {
     public FormationCoreMenu(int containerId, Inventory inventory, BlockEntity blockEntity) {
         super(ModMenuTypes.FORMATION_CORE_MENU.get(),containerId);
         this.formationCore = (AbstractFormationCoreBlockEntity) blockEntity;
+        this.TE_INVENTORY_SLOT_COUNT = formationCore.MAX_ARRAY_BLUEPRINTS();
+        this.TE_FUEL_INVENTORY_SLOT_INDEX = TE_INVENTORY_FIRST_SLOT_INDEX+TE_INVENTORY_SLOT_COUNT;
         this.level = inventory.player.level();
         addPlayerHotBar(inventory);
         addPlayerInventory(inventory);
         System.out.println("CREATING INVENTORY SLOTS");
         int xOffset = 18;
-        int yOffset = 18;
+
         for(int i = 0; i<formationCore.MAX_ARRAY_BLUEPRINTS(); i++) {
             System.out.println("CREATING SLOT " + i);
-            this.addSlot(new SlotItemHandler(this.formationCore.inventory, i, 62+xOffset*i, 35+yOffset*i));
+            this.addSlot(new SlotItemHandler(this.formationCore.inventory, i, 62+xOffset*i, 35));
         }
-        this.addSlot(new SlotItemHandler(this.formationCore.fuelInventory, 0,24,52));
+        this.addSlot(new SlotItemHandler(this.formationCore.fuelInventory, 0,25,55));
     }
 
 
     @Override
     public boolean stillValid(Player player) {
         return stillValid(ContainerLevelAccess.create(level, formationCore.getBlockPos()),
-                player, ModBlocks.MORTAL_FORMATION_CORE.get());
+                player, ModBlocks.MORTAL_FORMATION_CORE.get()) ||
+                stillValid(ContainerLevelAccess.create(level, formationCore.getBlockPos()),
+                player,ModBlocks.PRIMAL_FORMATION_CORE.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {
@@ -79,23 +84,49 @@ public class FormationCoreMenu extends AbstractContainerMenu {
     private static final int VANILLA_FIRST_SLOT_INDEX = 0;
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
+
+
+
+
+
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 1;  // must be the number of slots you have!
+    private final int TE_INVENTORY_SLOT_COUNT;  // must be the number of slots you have!
+    private final int TE_FUEL_INVENTORY_SLOT_INDEX;
+
     @Override
     public ItemStack quickMoveStack(Player playerIn, int pIndex) {
         Slot sourceSlot = slots.get(pIndex);
         if (sourceSlot == null || !sourceSlot.hasItem()) return ItemStack.EMPTY;  //EMPTY_ITEM
+
         ItemStack sourceStack = sourceSlot.getItem();
         ItemStack copyOfSourceStack = sourceStack.copy();
+
+
+
+
+        int TE_FINAL_SLOT_COUNT;
+        int TE_FINAL_INVENTORY_FIRST_SLOT_INDEX;
+        System.out.println(sourceStack.is(ModTags.Items.ARRAY_BLUEPRINT));
+        if(sourceStack.is(ModTags.Items.ARRAY_BLUEPRINT)){
+            //use TE_INVENTORY_SLOTS SLOTS
+            System.out.println("TRYING TO MOVE ARRAY BLUEPRINT");
+            TE_FINAL_SLOT_COUNT = TE_INVENTORY_SLOT_COUNT;
+            TE_FINAL_INVENTORY_FIRST_SLOT_INDEX = TE_INVENTORY_FIRST_SLOT_INDEX;
+        }else if( sourceStack.is(ModTags.Items.ARRAY_FORMATION_FUEL)){
+            //use TE_FUEL_INVENTORY_SLOTS
+            TE_FINAL_SLOT_COUNT = 1;
+            TE_FINAL_INVENTORY_FIRST_SLOT_INDEX = TE_FUEL_INVENTORY_SLOT_INDEX;
+
+        }else {return ItemStack.EMPTY;}
 
         // Check if the slot clicked is one of the vanilla container slots
         if (pIndex < VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT) {
             // This is a vanilla container slot so merge the stack into the tile inventory
-            if (!moveItemStackTo(sourceStack, TE_INVENTORY_FIRST_SLOT_INDEX, TE_INVENTORY_FIRST_SLOT_INDEX
-                    + TE_INVENTORY_SLOT_COUNT, false)) {
+            if (!moveItemStackTo(sourceStack, TE_FINAL_INVENTORY_FIRST_SLOT_INDEX, TE_FINAL_INVENTORY_FIRST_SLOT_INDEX
+                    + TE_FINAL_SLOT_COUNT, false)) {
                 return ItemStack.EMPTY;  // EMPTY_ITEM
             }
-        } else if (pIndex < TE_INVENTORY_FIRST_SLOT_INDEX + TE_INVENTORY_SLOT_COUNT) {
+        } else if (pIndex < TE_FINAL_INVENTORY_FIRST_SLOT_INDEX + TE_FINAL_SLOT_COUNT) {
             // This is a TE slot so merge the stack into the players inventory
             if (!moveItemStackTo(sourceStack, VANILLA_FIRST_SLOT_INDEX, VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT, false)) {
                 return ItemStack.EMPTY;
@@ -113,5 +144,6 @@ public class FormationCoreMenu extends AbstractContainerMenu {
         sourceSlot.onTake(playerIn, sourceStack);
         return copyOfSourceStack;
     }
+
 
 }

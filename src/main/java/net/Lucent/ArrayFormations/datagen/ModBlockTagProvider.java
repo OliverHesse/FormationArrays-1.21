@@ -2,6 +2,7 @@ package net.Lucent.ArrayFormations.datagen;
 
 import net.Lucent.ArrayFormations.ArrayFormationsMod;
 import net.Lucent.ArrayFormations.block.ModBlocks;
+import net.Lucent.ArrayFormations.util.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
@@ -28,6 +29,22 @@ public class ModBlockTagProvider extends BlockTagsProvider {
 
                 .add(ModBlocks.MORTAL_FORMATION_CORE.get())
                 .add(ModBlocks.PRIMAL_FORMATION_CORE.get());
+        tag(ModTags.Blocks.ARRAY_FLAG)
+                .add(ModBlocks.ARRAY_FLAG_EARTH.get())
+                .add(ModBlocks.ARRAY_FLAG_METAL.get())
+                .add(ModBlocks.ARRAY_FLAG_WOOD.get())
+                .add(ModBlocks.ARRAY_FLAG_WATER.get())
+                .add(ModBlocks.ARRAY_FLAG_FIRE.get());
+        tag(ModTags.Blocks.EARTH_ARRAY_FLAG)
+                .add(ModBlocks.ARRAY_FLAG_EARTH.get());
+        tag(ModTags.Blocks.FIRE_ARRAY_FLAG)
+                .add(ModBlocks.ARRAY_FLAG_FIRE.get());
+        tag(ModTags.Blocks.WOOD_ARRAY_FLAG)
+                .add(ModBlocks.ARRAY_FLAG_WOOD.get());
+        tag(ModTags.Blocks.WATER_ARRAY_FLAG)
+                .add(ModBlocks.ARRAY_FLAG_WATER.get());
+        tag(ModTags.Blocks.METAL_ARRAY_FLAG)
+                .add(ModBlocks.ARRAY_FLAG_METAL.get());
 
     }
 }

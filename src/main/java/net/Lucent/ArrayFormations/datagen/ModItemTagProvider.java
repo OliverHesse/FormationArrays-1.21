@@ -7,6 +7,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -28,6 +29,10 @@ public class ModItemTagProvider extends ItemTagsProvider {
 
         tag(ModTags.Items.SPIRIT_STONE)
                 .add(ModItems.SPIRIT_STONE.get());
+
+        tag(ModTags.Items.ARRAY_BLUEPRINT)
+                .add(ModItems.REGEN_ARRAY_BLUEPRINT.get())
+                .add(ModItems.SATURATION_ARRAY_BLUEPRINT.get());
 
     }
 }

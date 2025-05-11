@@ -10,6 +10,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.ItemStackHandler;
@@ -27,6 +28,8 @@ public class MortalFormationCoreBlockEntity extends AbstractFormationCoreBlockEn
     public double MAX_QI() {
         return 1000;
     }
+
+
 
     public MortalFormationCoreBlockEntity( BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.MORTAL_FORMATION_CORE_BE.get(), pos, blockState );
