@@ -1,6 +1,29 @@
 
--Bug Fixes-
-☐ Fix buggy sprites when opening menu
+-current task-
+☐ implement datamaps for formation cores
 
 
+
+-current feature tasks-
+☐ make simple crystals create a new itemstack of size 1 when trying to save location with stack size >1
+☐ change array blueprints to use a supplier to save on resources and to make a unique instance per formation core
+☐ make sure to add loaded blueprint executors to array
+☐ add energy to the arrays
+☐ cannot check for receiver if chunk is unloaded. therefore try load chunk ahead of time and check if it exists, or...
+when they try to go through the portal, and the array receiver does not exists teleport them to a random position
+☐ get array formations to pull data from configs. aka give a config key for each
+☐ get formation cores to read from config as well
+
+☐ by using Datamaps make it such that i can reduce the formation core classes down to 1. and only need more if i want a unique core
+
+
+- potential balance features/improvements
+☐ add some sort of cooldown to how frequently a core can consume fuel
+☐ make sync formation core qi only fire when in menu
 -Planned Features-
+☐ secret realms. create secret realms and a special array blueprint for them(these would be quite expensive) each one links to its own secret realm
+☐ multicore arrays, basically an array blueprint that requires other array blueprints in certain node locations active to function
+☐ add force active blueprints that need to be activated
+☐ add a force active teleport scroll that has a cool animation
+☐ have array cores and receivers break if no block beneath them
+☐ add barrier rendering. ill be real i cba to do this

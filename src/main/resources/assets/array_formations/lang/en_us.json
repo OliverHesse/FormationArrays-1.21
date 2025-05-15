@@ -1,7 +1,12 @@
 {
   "item.array_formations.regen_array_blueprint" : "Regen Array Blueprint",
+  "item.array_formations.barrier_array_blueprint" : "Barrier Array Blueprint",
   "item.array_formations.saturation_array_blueprint" : "Saturation Array Blueprint",
+  "item.array_formations.simple_portal_array_blueprint" : "Simple Portal Array Blueprint",
+
+  "item.array_formations.barrier_token": "Barrier Token",
   "item.array_formations.spirit_stone" : "Spirit Stone",
+  "item.array_formations.simple_location_crystal" : "Simple Location Crystal",
   "item.array_formations.spirit_stone_dust" : "Spirit Stone Dust",
   "item.array_formations.spirit_stone_paste" : "Spirit Stone Paste",
   "item.array_formations.condensed_qi_bucket" : "Condensed Qi Bucket",
@@ -12,7 +17,7 @@
   "block.array_formations.array_flag_water": "Water Array Flag",
   "block.array_formations.array_flag_metal": "Metal Array Flag",
   "block.array_formations.array_flag_wood": "Wood Array Flag",
-
+  "block.array_formations.array_receiver_base": "Array Receiver",
 
   "creativetab.array_formations.array_formation_items": "Array Formations"
 }

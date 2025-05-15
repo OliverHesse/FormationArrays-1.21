@@ -2,10 +2,10 @@ package net.Lucent.ArrayFormations.block;
 
 import net.Lucent.ArrayFormations.ArrayFormationsMod;
 import net.Lucent.ArrayFormations.block.custom.ArrayFlagBlock;
-import net.Lucent.ArrayFormations.block.custom.FormationCoreBlock;
+import net.Lucent.ArrayFormations.block.custom.ArrayReceiverBaseBlock;
+import net.Lucent.ArrayFormations.block.custom.BaseFormationCoreBlock;
 
-import net.Lucent.ArrayFormations.block.entity.MortalFormationCoreBlockEntity;
-import net.Lucent.ArrayFormations.block.entity.PrimalFormationCoreBlockEntity;
+import net.Lucent.ArrayFormations.block.entity.BaseFormationCoreBlockEntity;
 import net.Lucent.ArrayFormations.item.ModItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -66,18 +66,26 @@ public class ModBlocks {
 
 
     public static final DeferredBlock<Block> MORTAL_FORMATION_CORE = registerBlock("mortal_formation_core",
-            () -> new FormationCoreBlock(BlockBehaviour.Properties.of()
+            () -> new BaseFormationCoreBlock(BlockBehaviour.Properties.of()
                     .strength(2f)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.ANVIL)
-                    .noOcclusion(),MortalFormationCoreBlockEntity.class));
+                    .noOcclusion(), BaseFormationCoreBlockEntity.class,"Mortal Formation Core"));
 
     public static final DeferredBlock<Block> PRIMAL_FORMATION_CORE = registerBlock("primal_formation_core",
-            () -> new FormationCoreBlock(BlockBehaviour.Properties.of()
+            () -> new BaseFormationCoreBlock(BlockBehaviour.Properties.of()
                     .strength(2f)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.ANVIL)
-                    .noOcclusion(), PrimalFormationCoreBlockEntity.class));
+                    .noOcclusion(), BaseFormationCoreBlockEntity.class,"Primal Formation Core"));
+
+    public static final DeferredBlock<Block> ARRAY_RECEIVER_BASE = registerBlock("array_receiver_base",
+            () -> new ArrayReceiverBaseBlock(BlockBehaviour.Properties.of()
+                    .strength(2f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.AMETHYST_CLUSTER)
+                    .noOcclusion()
+                ));
 
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block){
@@ -85,6 +93,7 @@ public class ModBlocks {
         registerBlockItems(name,toReturn);
         return toReturn;
     }
+
 
 
 

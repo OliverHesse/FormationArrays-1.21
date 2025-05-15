@@ -16,8 +16,8 @@ import java.util.function.IntConsumer;
 
 public class ImageButton extends ButtonBase{
     public TextureBlitData textureBlitData;
-    public ImageButton(TextureBlitData textureBlitData, int x, int y, int width, int height, IntConsumer buttonClick) {
-        super(x, y, width, height,buttonClick);
+    public ImageButton(TextureBlitData textureBlitData, int x, int y, int width, int height, IntConsumer onClick) {
+        super(x, y, width, height,onClick);
         this.textureBlitData = textureBlitData;
 
     }
@@ -43,7 +43,7 @@ public class ImageButton extends ButtonBase{
     }
 
     public static ImageButton createImageButton(ResourceLocation data, TextureSubSection unf, TextureSubSection hov, TextureSubSection f,
-                                                int x, int y, int tWidth, int tHeight, int width, int height, IntConsumer onClick){
+                                                int x, int y, int tWidth, int tHeight, int width, int height,IntConsumer onClick){
         TextureBlitData textureData = new TextureBlitData(
                 data,
                 tWidth,
@@ -65,7 +65,7 @@ public class ImageButton extends ButtonBase{
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        System.out.println("screen clicked");
+
         if (!isMouseOver(mouseX, mouseY)) {
             return false;
         }

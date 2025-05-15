@@ -24,15 +24,23 @@ public class ModItemTagProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
-        tag(ModTags.Items.ARRAY_FORMATION_FUEL)
-                .add(ModItems.SPIRIT_STONE.get());
+        tag(ModTags.Items.FORMATION_ARRAY_FUEL)
+                .add(ModItems.SPIRIT_STONE.get())
+                .add(ModItems.CONDENSED_QI_BUCKET.get())
+                .add(ModItems.SPIRIT_STONE_DUST.get())
+                .add(ModItems.SPIRIT_STONE_PASTE.get());
 
         tag(ModTags.Items.SPIRIT_STONE)
                 .add(ModItems.SPIRIT_STONE.get());
 
         tag(ModTags.Items.ARRAY_BLUEPRINT)
                 .add(ModItems.REGEN_ARRAY_BLUEPRINT.get())
-                .add(ModItems.SATURATION_ARRAY_BLUEPRINT.get());
+                .add(ModItems.SATURATION_ARRAY_BLUEPRINT.get())
+                .add(ModItems.BARRIER_ARRAY_BLUEPRINT.get())
+                .add(ModItems.SIMPLE_PORTAL_ARRAY_BLUEPRINT.get());
+
+        tag(ModTags.Items.BARRIER_TOKEN)
+                .add(ModItems.BARRIER_TOKEN.get());
 
     }
 }

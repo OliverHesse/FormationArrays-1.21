@@ -50,13 +50,14 @@ public abstract class ButtonBase implements Renderable, GuiEventListener, Narrat
 
     protected IntConsumer onClick;
 
-    protected ButtonBase(int x, int y, int width, int height, IntConsumer onClick){
+    protected ButtonBase(int x, int y, int width, int height,IntConsumer onClick){
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         font = Minecraft.getInstance().font;
         this.onClick = onClick;
+
     }
 
 

@@ -22,6 +22,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
 
         dropSelf(ModBlocks.PRIMAL_FORMATION_CORE.get());
         dropSelf(ModBlocks.MORTAL_FORMATION_CORE.get());
+        dropSelf(ModBlocks.ARRAY_RECEIVER_BASE.get());
     }
 
 

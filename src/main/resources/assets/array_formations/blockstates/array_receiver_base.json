@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "array_formations:block/array_receiver_base"
+    }
+  }
+}

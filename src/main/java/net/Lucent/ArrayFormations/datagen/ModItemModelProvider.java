@@ -20,5 +20,10 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.CONDENSED_QI_BUCKET.get());
         basicItem(ModItems.REGEN_ARRAY_BLUEPRINT.get());
         basicItem(ModItems.SATURATION_ARRAY_BLUEPRINT.get());
+        basicItem(ModItems.BARRIER_ARRAY_BLUEPRINT.get());
+        basicItem(ModItems.BARRIER_TOKEN.get());
+        basicItem(ModItems.SIMPLE_LOCATION_CRYSTAL.get());
+        basicItem(ModItems.SIMPLE_PORTAL_ARRAY_BLUEPRINT.get());
+
     }
 }

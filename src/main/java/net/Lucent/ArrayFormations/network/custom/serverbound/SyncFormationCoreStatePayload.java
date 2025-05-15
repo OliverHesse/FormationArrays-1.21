@@ -1,19 +1,15 @@
-package net.Lucent.ArrayFormations.network.custom;
+package net.Lucent.ArrayFormations.network.custom.serverbound;
 
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufConvertible;
 import net.Lucent.ArrayFormations.ArrayFormationsMod;
-import net.Lucent.ArrayFormations.block.custom.FormationCoreBlock;
-import net.minecraft.client.Minecraft;
+import net.Lucent.ArrayFormations.block.AbstractClasses.AbstractFormationCoreBlockEntity;
+import net.Lucent.ArrayFormations.block.custom.BaseFormationCoreBlock;
+import net.Lucent.ArrayFormations.util.ModTags;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
@@ -36,13 +32,20 @@ public record SyncFormationCoreStatePayload(boolean newState, BlockPos blockPos)
         if(payload.blockPos == null){
             return;
         }
+
+
         BlockState blockState = context.player().level().getBlockState(payload.blockPos);
+        if(!blockState.is(ModTags.Blocks.FORMATION_CORE)){
+            return;
+        }
         System.out.println("Changing state");
         blockState.setValue(
-                FormationCoreBlock.FORMATION_CORE_STATE,
+                BaseFormationCoreBlock.FORMATION_CORE_STATE,
                 payload.newState
         );
-        context.player().level().setBlockAndUpdate(payload.blockPos, blockState.setValue( FormationCoreBlock.FORMATION_CORE_STATE, payload.newState));
-
+        context.player().level().setBlockAndUpdate(payload.blockPos, blockState.setValue( BaseFormationCoreBlock.FORMATION_CORE_STATE, payload.newState));
+        if(!payload.newState){
+            ((AbstractFormationCoreBlockEntity) context.player().level().getBlockEntity(payload.blockPos)).cancelFormationBlueprints();
+        }
     }
 }

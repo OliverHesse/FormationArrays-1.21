@@ -6,6 +6,7 @@ import net.Lucent.ArrayFormations.util.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
+import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
@@ -28,7 +29,8 @@ public class ModBlockTagProvider extends BlockTagsProvider {
         tag(BlockTags.NEEDS_DIAMOND_TOOL)
 
                 .add(ModBlocks.MORTAL_FORMATION_CORE.get())
-                .add(ModBlocks.PRIMAL_FORMATION_CORE.get());
+                .add(ModBlocks.PRIMAL_FORMATION_CORE.get())
+                .add(ModBlocks.ARRAY_RECEIVER_BASE.get());
         tag(ModTags.Blocks.ARRAY_FLAG)
                 .add(ModBlocks.ARRAY_FLAG_EARTH.get())
                 .add(ModBlocks.ARRAY_FLAG_METAL.get())
@@ -46,5 +48,13 @@ public class ModBlockTagProvider extends BlockTagsProvider {
         tag(ModTags.Blocks.METAL_ARRAY_FLAG)
                 .add(ModBlocks.ARRAY_FLAG_METAL.get());
 
+        tag(ModTags.Blocks.FORMATION_CORE)
+                .add(ModBlocks.MORTAL_FORMATION_CORE.get())
+                .add(ModBlocks.PRIMAL_FORMATION_CORE.get());
+
+        tag(ModTags.Blocks.PORTAL_RECEIVER)
+                .add(ModBlocks.MORTAL_FORMATION_CORE.get())
+                .add(ModBlocks.PRIMAL_FORMATION_CORE.get())
+                .add(ModBlocks.ARRAY_RECEIVER_BASE.get());
     }
 }

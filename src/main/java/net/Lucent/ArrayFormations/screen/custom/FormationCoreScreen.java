@@ -1,13 +1,16 @@
 package net.Lucent.ArrayFormations.screen.custom;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import net.Lucent.ArrayFormations.ArrayFormationsMod;
 import net.Lucent.ArrayFormations.block.AbstractClasses.AbstractFormationCoreBlockEntity;
-import net.Lucent.ArrayFormations.block.custom.FormationCoreBlock;
+import net.Lucent.ArrayFormations.block.custom.BaseFormationCoreBlock;
 import net.Lucent.ArrayFormations.gui.controls.ImageButton;
-import net.Lucent.ArrayFormations.gui.util.TextureBlitData;
+import net.Lucent.ArrayFormations.gui.controls.RotateItemButton;
 import net.Lucent.ArrayFormations.gui.util.TextureSubSection;
-import net.Lucent.ArrayFormations.network.custom.SyncFormationCoreStatePayload;
+import net.Lucent.ArrayFormations.network.custom.serverbound.SyncFormationCoreStatePayload;
+import net.Lucent.ArrayFormations.util.ModTags;
 import net.minecraft.client.gui.GuiGraphics;
 
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -15,9 +18,10 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.fml.ISystemReportExtender;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.joml.Quaternionf;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -46,31 +50,56 @@ public class FormationCoreScreen extends AbstractContainerScreen<FormationCoreMe
     private final TextureSubSection STATE_BUTTON_PRESSED  =
             new TextureSubSection(0,25,48,13);
 
+    private static final ResourceLocation QI_AMOUNT_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(ArrayFormationsMod.MOD_ID,"textures/gui/sprites/formation_core_qi_basic_display.png");
+
+
+    public class SlotDisplayData{
+        public int buttonClickTime = 0;
+        public ImageButton rotatedButton = null;
+
+
+    }
+
+
     public final int BUTTON_PRESS_TIME_TICKS = 10;
-    public Map<Integer, Integer> buttonsClickTime = new HashMap<Integer, Integer>();
-    public Map<Integer, Boolean> buttonStates = new HashMap<Integer, Boolean>();
-    public Map<Integer, ImageButton> rotationButtons = new HashMap<Integer, ImageButton>();
+
+    public Map<Integer,SlotDisplayData> SlotDisplayDataHolder = new HashMap<>();
 
     public ImageButton stateButton = null;
     public Integer stateButtonClickTime = 0;
-    public Boolean stateButtonState = true;
-
 
     public FormationCoreScreen(FormationCoreMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
 
-        for(int i=0;i<menu.formationCore.MAX_ARRAY_BLUEPRINTS();i++){
-            buttonStates.put(i,false);
+        for(int i=0;i<menu.formationCore.inventory.getSlots();i++){
 
+            SlotDisplayDataHolder.put(i,new SlotDisplayData());
 
         }
     }
 
 
+    public void renderQiAmount(GuiGraphics guiGraphics, int x, int y,int mouseX,int mouseY){
+
+
+        //i could definitely make this prettier
+
+        int img_height = ((int) Math.floor((53 * (((double) menu.getCurrentQiPercent()) / 100))));
+
+        int locx = x + 9;
+        int locy = y + 18+(53-img_height);
+        int img_width = 13;
+
+        guiGraphics.blit(QI_AMOUNT_TEXTURE,locx,locy,0,0,img_width,img_height,13,53);
+        if(mouseX> locx && mouseX < locx+img_width &&  mouseY>y+18 && mouseY<y+70){
+            guiGraphics.renderTooltip(this.font,Component.literal(menu.formationCore.qiContainer.getQi().toString()),mouseX,mouseY);
+        }
+    }
 
 
     public void renderInventorySlots(GuiGraphics guiGraphics,int x, int y){
-        int maxSlots = menu.formationCore.MAX_ARRAY_BLUEPRINTS();
+        int maxSlots = menu.formationCore.inventory.getSlots();
         int xOffset = 18;
 
         for(int i = 1; i<maxSlots; i++){
@@ -79,10 +108,10 @@ public class FormationCoreScreen extends AbstractContainerScreen<FormationCoreMe
     }
     //true = pressed false = not pressed
     public void renderInventorySlotButtons(GuiGraphics guiGraphics,int mouseX, int mouseY,float partialTick,int x,int y){
-        if(rotationButtons.size() != menu.formationCore.MAX_ARRAY_BLUEPRINTS()){
-            for(int i = 0; i <  menu.formationCore.MAX_ARRAY_BLUEPRINTS();i++){
+        if(SlotDisplayDataHolder.get(0).rotatedButton == null){
+            for(int i = 0; i <  menu.formationCore.inventory.getSlots();i++){
                 int xOffset = 18;
-                rotationButtons.put(i, ImageButton.createImageButton(
+                SlotDisplayDataHolder.get(i).rotatedButton= RotateItemButton.createRotateButton(
                         BUTTON_TEXTURES,
                         BUTTON_UNFOCUSED,
                         BUTTON_HOVER,
@@ -93,26 +122,26 @@ public class FormationCoreScreen extends AbstractContainerScreen<FormationCoreMe
                         48,
                         18,
                         18,
-                        button ->{
-                            System.out.println("button clicked to rotate slot");
-                        }
-                ));
+                        i,
+                        menu.formationCore
+                );
 
             }
         }
-        for(int i = 0; i < rotationButtons.size(); i++){
+        for(int i = 0; i < SlotDisplayDataHolder.size(); i++){
             int xOffset = 18;
 
-            if(rotationButtons.get(i).isFocused()){
-                buttonsClickTime.put(i,1+buttonsClickTime.getOrDefault(i,0));
-                if(buttonsClickTime.get(i) >= BUTTON_PRESS_TIME_TICKS){
-                    buttonsClickTime.put(i,0);
-                    rotationButtons.get(i).setFocused(false);
+            SlotDisplayData slotData = SlotDisplayDataHolder.get(i);
+            if(slotData.rotatedButton.isFocused()){
+                slotData.buttonClickTime = 1+ slotData.buttonClickTime;
+                if( slotData.buttonClickTime  >= BUTTON_PRESS_TIME_TICKS){
+                    slotData.buttonClickTime = 0;
+                    slotData.rotatedButton.setFocused(false);
 
                 }
             }
 
-            rotationButtons.get(i).render(guiGraphics,mouseX,mouseY,partialTick);
+            slotData.rotatedButton.render(guiGraphics,mouseX,mouseY,partialTick);
 
         }
 
@@ -139,7 +168,7 @@ public class FormationCoreScreen extends AbstractContainerScreen<FormationCoreMe
                         System.out.println("changing button state");
                         AbstractFormationCoreBlockEntity block = menu.formationCore;
                         PacketDistributor.sendToServer(new SyncFormationCoreStatePayload(
-                                !block.getBlockState().getValue(FormationCoreBlock.FORMATION_CORE_STATE),
+                                !block.getBlockState().getValue(BaseFormationCoreBlock.FORMATION_CORE_STATE),
                                 block.getBlockPos()
                         ));
 
@@ -157,7 +186,7 @@ public class FormationCoreScreen extends AbstractContainerScreen<FormationCoreMe
         }
         stateButton.render(guiGraphics,mouseX,mouseY,partialTick);
 
-        if(menu.formationCore.getBlockState().getValue(FormationCoreBlock.FORMATION_CORE_STATE)){
+        if(menu.formationCore.getBlockState().getValue(BaseFormationCoreBlock.FORMATION_CORE_STATE)){
             guiGraphics.drawString(this.font,"Active",x+123+7,y+8,0,false);
         } else{
             guiGraphics.drawString(this.font,"Inactive",x+123+5,y+8,0,false);
@@ -167,9 +196,7 @@ public class FormationCoreScreen extends AbstractContainerScreen<FormationCoreMe
 
     }
 
-    public void renderQiBar(){}
 
-    public void renderFlagRotations(){}
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
@@ -191,16 +218,46 @@ public class FormationCoreScreen extends AbstractContainerScreen<FormationCoreMe
         renderInventorySlots(guiGraphics,x,y);
 
         renderChangeActiveStateButton(guiGraphics,pMouseX,pMouseY,pPartialTick,x,y);
-        renderFlagRotations();
-        renderQiBar();
+
+        renderQiAmount(guiGraphics,x,y,pMouseX,pMouseY);
+
+    }
+
+    @Override
+    protected void renderSlot(GuiGraphics guiGraphics, Slot slot) {
+
+        ItemStack itemStack = slot.getItem();
+        if(!itemStack.is(ModTags.Items.ARRAY_BLUEPRINT)){
+            super.renderSlot(guiGraphics, slot);
+            return;
+            }
+        if(slot.index < menu.TE_INVENTORY_FIRST_SLOT_INDEX) {
+            super.renderSlot(guiGraphics, slot);
+            return;
+        }
+        int offset = slot.index-menu.TE_INVENTORY_FIRST_SLOT_INDEX;
+
+
+        int rotation = menu.formationCore.blueprintSlotData.get(offset).rotation;
+
+
+        PoseStack poseStack = guiGraphics.pose();
+        float angleDegrees = 90.0f*rotation;
+        Quaternionf qRotation = Axis.ZP.rotationDegrees(angleDegrees);
+        Quaternionf qRotation2 = Axis.ZP.rotationDegrees(-angleDegrees);
+        poseStack.rotateAround(qRotation,slot.x+8,slot.y+8,0);
+
+        guiGraphics.renderItem(itemStack,slot.x,slot.y);
+
+        poseStack.rotateAround(qRotation2,slot.x+8,slot.y+8,0);
 
     }
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        System.out.println("just why man");
-        for(ImageButton btn : rotationButtons.values()){
-            btn.mouseClicked(mouseX,mouseY,button);
+
+        for(SlotDisplayData btn : SlotDisplayDataHolder.values()){
+            btn.rotatedButton.mouseClicked(mouseX,mouseY,button);
         }
         stateButton.mouseClicked(mouseX,mouseY,button);
         return super.mouseClicked(mouseX, mouseY, button);

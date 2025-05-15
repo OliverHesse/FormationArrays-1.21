@@ -24,13 +24,18 @@ public class ModCreativeModeTabs {
                     .displayItems((itemDisplayParameters,output) -> {
                         output.accept(ModItems.REGEN_ARRAY_BLUEPRINT);
                         output.accept(ModItems.SATURATION_ARRAY_BLUEPRINT);
+                        output.accept(ModItems.BARRIER_ARRAY_BLUEPRINT);
                         output.accept(ModItems.SPIRIT_STONE_DUST);
                         output.accept(ModItems.SPIRIT_STONE);
                         output.accept(ModItems.SPIRIT_STONE_PASTE);
                         output.accept(ModBlocks.MORTAL_FORMATION_CORE);
                         output.accept(ModBlocks.PRIMAL_FORMATION_CORE);
 
+                        output.accept(ModBlocks.ARRAY_RECEIVER_BASE);
+                        output.accept(ModItems.BARRIER_TOKEN);
                         output.accept(ModItems.CONDENSED_QI_BUCKET);
+                        output.accept(ModItems.SIMPLE_LOCATION_CRYSTAL);
+                        output.accept(ModItems.SIMPLE_PORTAL_ARRAY_BLUEPRINT);
                         output.accept(ModBlocks.ARRAY_FLAG_FIRE);
                         output.accept(ModBlocks.ARRAY_FLAG_EARTH);
                         output.accept(ModBlocks.ARRAY_FLAG_METAL);
