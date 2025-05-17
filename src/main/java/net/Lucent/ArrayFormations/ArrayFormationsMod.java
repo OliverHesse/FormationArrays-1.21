@@ -11,6 +11,12 @@ import net.Lucent.ArrayFormations.entity.renderers.BasicPortalRenderer;
 import net.Lucent.ArrayFormations.item.ModCreativeModeTabs;
 import net.Lucent.ArrayFormations.item.ModItems;
 import net.Lucent.ArrayFormations.network.ModPayloads;
+import net.Lucent.ArrayFormations.programmableArrays.FormationNodeWrapper;
+import net.Lucent.ArrayFormations.programmableArrays.conditionalNodes.ListInputContainsCondition;
+import net.Lucent.ArrayFormations.programmableArrays.constantNodes.ConstantInputNode;
+import net.Lucent.ArrayFormations.programmableArrays.coreNodes.GenericBarrierCoreFormationNode;
+import net.Lucent.ArrayFormations.programmableArrays.sensoryNodes.EntityDetectionNode;
+import net.Lucent.ArrayFormations.programmableArrays.serializers.ProgrammableNodesSerializer;
 import net.Lucent.ArrayFormations.screen.ModMenuTypes;
 import net.Lucent.ArrayFormations.screen.custom.FormationCoreScreen;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -39,6 +45,8 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 
+import java.util.List;
+
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(ArrayFormationsMod.MOD_ID)
 public class ArrayFormationsMod
@@ -47,6 +55,26 @@ public class ArrayFormationsMod
     public static final String MOD_ID = "array_formations";
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
+
+
+    private void generateAndSerializeTestArray(){
+        //create a simple barrier array with a connection to an entity array a list search array and then a constant doble for radius
+        EntityDetectionNode detectionNode = new EntityDetectionNode();
+        ListInputContainsCondition listSearchNode = new ListInputContainsCondition();
+        ConstantInputNode<String> listStringInput = new ConstantInputNode<String>("Pleeu");
+        ConstantInputNode<Double> radiusInputNode = new ConstantInputNode<>(20.0);
+        GenericBarrierCoreFormationNode rootNode = new GenericBarrierCoreFormationNode();
+
+        rootNode.addNodeConnection("canRun",listSearchNode,rootNode,"evaluate");
+        rootNode.addNodeConnection("barrierRadius",radiusInputNode,rootNode,"data");
+        listSearchNode.addNodeConnection("listInput",detectionNode,listSearchNode,"nearbyEntities");
+        listSearchNode.addNodeConnection("containsInput",listStringInput,listSearchNode,"data");
+
+        FormationNodeWrapper wrapper = new FormationNodeWrapper(List.of(rootNode));
+        ProgrammableNodesSerializer.serialize(wrapper.rootCoreNodes);
+
+
+    }
 
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
@@ -67,6 +95,7 @@ public class ArrayFormationsMod
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (ExampleMod) to respond directly to events.
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
+        generateAndSerializeTestArray();
         NeoForge.EVENT_BUS.register(this);
 
 
