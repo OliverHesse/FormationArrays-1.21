@@ -1,0 +1,12 @@
+{
+  "values": {
+    "array_formations:mortal_formation_core": {
+      "maxBlueprintSlots": 1,
+      "maxQi": "10000"
+    },
+    "array_formations:primal_formation_core": {
+      "maxBlueprintSlots": 3,
+      "maxQi": "100000"
+    }
+  }
+}

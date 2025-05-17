@@ -1,0 +1,11 @@
+// 1.21.1	2025-05-13T18:12:32.9501892	Tags for minecraft:block mod id array_formations
+8871fa2b2b759fffe97c0931afd2a387650125cd data/array_formations/tags/block/array_flag.json
+12231e2426b4f0ec5c693f74e3e229e99b13f4fc data/array_formations/tags/block/earth_array_flag.json
+8b1d34ae11788424908a5b727792b34112b2bef9 data/array_formations/tags/block/fire_array_flag.json
+681c3e4a827f88500da3e5c9172775d3f3b30393 data/array_formations/tags/block/formation_core.json
+0213bf77e553af44ee91131700e975a23ddf6df0 data/array_formations/tags/block/metal_array_flag.json
+2946d7aa4e31e42f6e22cd15569165cbfa20bf69 data/array_formations/tags/block/portal_receiver.json
+998212d7ff7b951de752f3bb1e0cf1936d4a424d data/array_formations/tags/block/water_array_flag.json
+5736c0b4eaa8b9590416f16d15196cdb2ea64ce9 data/array_formations/tags/block/wood_array_flag.json
+681c3e4a827f88500da3e5c9172775d3f3b30393 data/minecraft/tags/block/mineable/pickaxe.json
+2946d7aa4e31e42f6e22cd15569165cbfa20bf69 data/minecraft/tags/block/needs_diamond_tool.json

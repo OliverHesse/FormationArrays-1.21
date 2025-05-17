@@ -1,0 +1,8 @@
+{
+  "values": [
+    "array_formations:regen_array_blueprint",
+    "array_formations:saturation_array_blueprint",
+    "array_formations:barrier_array_blueprint",
+    "array_formations:simple_portal_array_blueprint"
+  ]
+}

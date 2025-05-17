@@ -1,0 +1,5 @@
+// 1.21.1	2025-05-15T17:39:50.4320095	Tags for minecraft:item mod id array_formations
+7c5a3fd5e89186088c0d6a0a3b6a8227adb88c9d data/array_formations/tags/item/array_blueprint.json
+48aafc1e2cb715c60c88cf92944b07c3c435a809 data/array_formations/tags/item/array_formation_fuel.json
+a45eb4bd46be99a7c309a39fbc7d4bad6ab5a6c3 data/array_formations/tags/item/barrier_token.json
+0253a0f25cba4f13395af52e565c93b3549c6c33 data/array_formations/tags/item/spirit_stone.json

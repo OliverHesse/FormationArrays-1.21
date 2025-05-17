@@ -1,0 +1,4 @@
+// 1.21.1	2025-05-13T18:12:09.8179568	Loot Tables
+afd454e79e6e0918df4a17f8efc1a639b8b960f7 data/array_formations/loot_table/blocks/array_receiver_base.json
+d17e18f137d867904f9b58364808d8f6f299d355 data/array_formations/loot_table/blocks/mortal_formation_core.json
+accc97dd496f1886722a40a6d52ecded53c70daf data/array_formations/loot_table/blocks/primal_formation_core.json

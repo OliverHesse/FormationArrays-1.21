@@ -1,0 +1,16 @@
+{
+  "values": {
+    "array_formations:condensed_qi_bucket": {
+      "qi": "150"
+    },
+    "array_formations:spirit_stone": {
+      "qi": "100"
+    },
+    "array_formations:spirit_stone_dust": {
+      "qi": "8"
+    },
+    "array_formations:spirit_stone_paste": {
+      "qi": "200"
+    }
+  }
+}

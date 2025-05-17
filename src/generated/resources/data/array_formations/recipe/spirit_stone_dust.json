@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "array_formations:spirit_stone"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "id": "array_formations:spirit_stone_dust"
+  }
+}

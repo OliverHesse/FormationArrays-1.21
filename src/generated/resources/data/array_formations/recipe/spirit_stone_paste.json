@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "array_formations:condensed_qi_bucket"
+    },
+    "F": {
+      "item": "array_formations:spirit_stone_dust"
+    }
+  },
+  "pattern": [
+    "FFF",
+    "FBF",
+    "FFF"
+  ],
+  "result": {
+    "count": 1,
+    "id": "array_formations:spirit_stone_paste"
+  }
+}

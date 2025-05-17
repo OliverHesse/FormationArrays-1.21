@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_simple_location_crystal": {
+      "conditions": {
+        "items": [
+          {
+            "items": "array_formations:simple_location_crystal"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "array_formations:simple_portal_array_blueprint"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_simple_location_crystal"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "array_formations:simple_portal_array_blueprint"
+    ]
+  }
+}
