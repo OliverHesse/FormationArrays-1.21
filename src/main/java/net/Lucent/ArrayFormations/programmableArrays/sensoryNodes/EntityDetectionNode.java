@@ -32,6 +32,12 @@ public class EntityDetectionNode extends  AbstractSensoryNode{
 
     }
 
+
+    @Override
+    public AbstractFormationNode copy() {
+        return new EntityDetectionNode();
+    }
+
     @Override
     public void addNodeConnection(String connection, AbstractFormationNode node,AbstractFormationNode receiverNode, String nodeConnection) {
         switch (connection){

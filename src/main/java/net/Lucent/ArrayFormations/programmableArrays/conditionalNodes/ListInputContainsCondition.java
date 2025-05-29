@@ -33,6 +33,11 @@ public class ListInputContainsCondition extends AbstractConditionalNode{
     }
 
     @Override
+    public AbstractFormationNode copy() {
+        return new ListInputContainsCondition();
+    }
+
+    @Override
     public void addNodeConnection(String connection, AbstractFormationNode node,AbstractFormationNode receiverNode, String nodeConnection) {
         switch (connection){
             case "listInput":
@@ -79,7 +84,7 @@ public class ListInputContainsCondition extends AbstractConditionalNode{
 
     @Override
     public String getDisplayName() {
-        return "Heavens plucking touch";
+        return "Heavenly scrying formation";
     }
 
     @Override

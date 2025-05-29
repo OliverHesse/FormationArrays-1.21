@@ -15,6 +15,10 @@ public class TwoConditionEqualityCondition extends AbstractConditionalNode{
     public GenericInputDataChannel<?> input2;
 
 
+    @Override
+    public AbstractFormationNode copy() {
+        return new TwoConditionEqualityCondition();
+    }
 
     @Override
     public void addNodeConnection(String connection, AbstractFormationNode node,AbstractFormationNode receiverNode, String nodeConnection) {

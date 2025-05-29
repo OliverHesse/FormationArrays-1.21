@@ -25,7 +25,13 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register("primal_formation_core_be",() -> BlockEntityType.Builder.of(
                     BaseFormationCoreBlockEntity::new, ModBlocks.PRIMAL_FORMATION_CORE.get()).build(null));
 
+    public static  final Supplier<BlockEntityType<ArrayEditorBlockEntity>> ARRAY_CRAFTER_BE =
+            BLOCK_ENTITIES.register("array_crafter_be",() -> BlockEntityType.Builder.of(
+                    ArrayEditorBlockEntity::new, ModBlocks.ARRAY_CRAFTER.get()).build(null));
 
+    public static  final Supplier<BlockEntityType<GUITestingBlockEntity>> GUI_BLOCK_ENTITY =
+            BLOCK_ENTITIES.register("gui_testing_be",() -> BlockEntityType.Builder.of(
+                    GUITestingBlockEntity::new, ModBlocks.GUI_BLOCK.get()).build(null));
 
     public static void register(IEventBus eventBus){
 

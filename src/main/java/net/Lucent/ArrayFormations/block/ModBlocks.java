@@ -1,9 +1,7 @@
 package net.Lucent.ArrayFormations.block;
 
 import net.Lucent.ArrayFormations.ArrayFormationsMod;
-import net.Lucent.ArrayFormations.block.custom.ArrayFlagBlock;
-import net.Lucent.ArrayFormations.block.custom.ArrayReceiverBaseBlock;
-import net.Lucent.ArrayFormations.block.custom.BaseFormationCoreBlock;
+import net.Lucent.ArrayFormations.block.custom.*;
 
 import net.Lucent.ArrayFormations.block.entity.BaseFormationCoreBlockEntity;
 import net.Lucent.ArrayFormations.item.ModItems;
@@ -22,6 +20,11 @@ public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(ArrayFormationsMod.MOD_ID);
 
 
+
+    public static final DeferredBlock<GUITestingBlock> GUI_BLOCK = registerBlock("gui_testing_block",
+            ()->new GUITestingBlock(BlockBehaviour.Properties.of()
+                    .noLootTable()
+                    .instabreak()));
 
 
     public static final DeferredBlock<ArrayFlagBlock> ARRAY_FLAG_FIRE = registerBlock("array_flag_fire",
@@ -86,7 +89,10 @@ public class ModBlocks {
                     .sound(SoundType.AMETHYST_CLUSTER)
                     .noOcclusion()
                 ));
-
+    public static final DeferredBlock<Block> ARRAY_CRAFTER = registerBlock("array_crafter",
+            ()-> new ArrayEditorBlock(BlockBehaviour.Properties.of()
+                    .noLootTable()
+                    ));
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block){
         DeferredBlock<T> toReturn = BLOCKS.register(name,block);

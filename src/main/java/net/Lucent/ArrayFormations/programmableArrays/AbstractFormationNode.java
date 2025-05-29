@@ -18,6 +18,7 @@ import java.util.Optional;
 public abstract class AbstractFormationNode {
 
 
+    public abstract AbstractFormationNode copy();
     //mainly used by the deserializer
     //i will most likely remove the generic type
     public abstract void addNodeConnection(String connection,AbstractFormationNode node,AbstractFormationNode receiverNode, String nodeConnection);

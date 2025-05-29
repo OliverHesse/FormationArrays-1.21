@@ -1,4 +1,4 @@
-package net.Lucent.ArrayFormations.screen.custom;
+package net.Lucent.ArrayFormations.screen.custom.OldArrayMenue;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -10,6 +10,7 @@ import net.Lucent.ArrayFormations.gui.controls.ImageButton;
 import net.Lucent.ArrayFormations.gui.controls.RotateItemButton;
 import net.Lucent.ArrayFormations.gui.util.TextureSubSection;
 import net.Lucent.ArrayFormations.network.custom.serverbound.SyncFormationCoreStatePayload;
+import net.Lucent.ArrayFormations.screen.custom.OldArrayMenue.FormationCoreMenu;
 import net.Lucent.ArrayFormations.util.ModTags;
 import net.minecraft.client.gui.GuiGraphics;
 

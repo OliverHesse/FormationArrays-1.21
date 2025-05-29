@@ -22,6 +22,8 @@ public class ModCreativeModeTabs {
                     .icon(() -> new ItemStack(ModItems.REGEN_ARRAY_BLUEPRINT.get()))
                     .title(Component.translatable("creativetab.array_formations.array_formation_items"))
                     .displayItems((itemDisplayParameters,output) -> {
+                        output.accept(ModBlocks.ARRAY_CRAFTER);
+                        output.accept(ModBlocks.GUI_BLOCK);
                         output.accept(ModItems.REGEN_ARRAY_BLUEPRINT);
                         output.accept(ModItems.SATURATION_ARRAY_BLUEPRINT);
                         output.accept(ModItems.BARRIER_ARRAY_BLUEPRINT);

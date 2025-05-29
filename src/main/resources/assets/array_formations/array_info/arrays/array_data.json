@@ -1,0 +1,118 @@
+{
+
+  "5 Element Barrier Array" : {
+    "texture": "textures/gui/programmable_gui/array_images/5_element_barrier_array.png",
+    "width": 64,
+    "height" : 64,
+    "flavour": "using the 5 elements to block all. this barrier uses the harmony between 5 elements to block all that attempts to break through",
+    "description": "a simple barrier array that can block people from entering.",
+    "connections": {
+      "canRun" : {
+        "type" : "input",
+        "dataType": "Boolean",
+        "description": "Determines if the barrier can run.",
+        "default": "true"
+      },
+      "barrierRadius": {
+        "type": "input",
+        "dataType" : "Double",
+        "description" : "Determines the radius of the barrier",
+        "default": "10",
+        "range": "5-20"
+      },
+      "barrierHealth": {
+        "type": "output",
+        "dataType": "Double",
+        "description" : "Outputs the barriers health nas a percentage"
+      }
+    }
+
+  },
+  "Heavenly Detection Array" : {
+    "texture": "textures/gui/programmable_gui/array_images/heavenly_detection_array.png",
+    "width": 64,
+    "height" : 64,
+    "flavour" : "",
+    "description": "detects entities in a certain radius",
+    "connections": {
+      "detectionRadius": {
+        "type" : "input",
+        "dataType": "Double",
+        "description": "determines the detection radius of the array",
+        "default": 8,
+        "range": "4-30"
+      },
+      "nearbyEntities": {
+        "type": "output",
+        "dataType": "List of Entities",
+        "description" : "Outputs a list of all entities in its radius"
+      }
+    }
+  },
+  "Heavens Constant" : {
+    "texture": "textures/gui/programmable_gui/array_images/heavens_constant_array.png",
+    "width": 32,
+    "height" : 32,
+    "flavour" : "holds the heavens laws in perpetuity",
+    "description" : "holds constant data values",
+    "connections" : {
+      "data" : {
+        "type" : "output",
+        "dataType": "Variable",
+        "description": "Outputs the stored data"
+      }
+    }
+  },
+  "Heavenly Scrying Formation" : {
+    "texture": "textures/gui/programmable_gui/array_images/heavens_constant_array.png",
+    "width": 32,
+    "height" : 32,
+    "flavour" : "strip back the heavens lore and peer into the truth",
+    "description" : "checks if the input is in the provided",
+    "connections": {
+      "listInput": {
+        "type": "input",
+        "dataType" : "List of something",
+        "description" : "takes in the list for comparison"
+      },
+      "dataInput" : {
+        "type": "input",
+        "dataType" : "Variable",
+        "description": "the data to check for"
+      },
+      "evaluate" : {
+        "type": "output",
+        "dataType": "Boolean",
+        "description" : "true if it is in the list, false otherwise"
+      }
+    }
+  },
+  "Heavens Scales of Balance" : {
+    "texture": "textures/gui/programmable_gui/array_images/heavens_constant_array.png",
+    "width": 32,
+    "height" : 32,
+    "flavour" : "uses the heavens scales to compare and balance",
+    "description" : "checks if 2 inputs are equal",
+    "connections" : {
+      "input1": {
+        "type" : "input",
+        "dataType": "Variable",
+        "description" : "first input",
+        "default": "false"
+      },
+      "input2": {
+        "type" : "input",
+        "dataType": "Variable",
+        "description" : "second input",
+        "default": "false"
+      },
+      "evaluate": {
+        "type" : "output",
+        "dataType": "Boolean",
+        "description" : "true if equal, false otherwise"
+      }
+    }
+  }
+
+
+}

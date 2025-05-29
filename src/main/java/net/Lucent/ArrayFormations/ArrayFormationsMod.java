@@ -18,11 +18,13 @@ import net.Lucent.ArrayFormations.programmableArrays.coreNodes.GenericBarrierCor
 import net.Lucent.ArrayFormations.programmableArrays.sensoryNodes.EntityDetectionNode;
 import net.Lucent.ArrayFormations.programmableArrays.serializers.ProgrammableNodesSerializer;
 import net.Lucent.ArrayFormations.screen.ModMenuTypes;
-import net.Lucent.ArrayFormations.screen.custom.FormationCoreScreen;
-import net.minecraft.world.item.CreativeModeTabs;
+import net.Lucent.ArrayFormations.screen.custom.OldArrayMenue.FormationCoreScreen;
+import net.Lucent.ArrayFormations.screen.custom.ProgrammableArrayMenu.ProgrammableFormationEditorMenu;
+import net.Lucent.ArrayFormations.screen.custom.ProgrammableArrayMenu.ProgrammableFormationEditorScreen;
+import net.Lucent.ArrayFormations.screen.custom.testingScreen.TestingScreenMenu;
+import net.Lucent.ArrayFormations.screen.custom.testingScreen.TestingScreenScreen;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
-import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 import org.slf4j.Logger;
@@ -150,6 +152,8 @@ public class ArrayFormationsMod
         @SubscribeEvent
         public static void registerScreens(RegisterMenuScreensEvent event) {
             event.register(ModMenuTypes.FORMATION_CORE_MENU.get(), FormationCoreScreen::new);
+            event.register(ModMenuTypes.PROGRAMMABLE_ARRAY_MENU.get(), ProgrammableFormationEditorScreen::new);
+            event.register(ModMenuTypes.GUI_TESTING_MENU.get(), TestingScreenScreen::new);
         }
 
         @SubscribeEvent
@@ -166,6 +170,7 @@ public class ArrayFormationsMod
         private static void registerDataMapTypes(RegisterDataMapTypesEvent event) {
             event.register(ModDataMaps.FORMATION_FUEL_COST);
             event.register(ModDataMaps.FORMATION_CORE_STATS);
+
         }
 
     }

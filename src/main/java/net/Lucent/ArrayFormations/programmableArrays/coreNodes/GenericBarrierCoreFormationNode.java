@@ -32,6 +32,11 @@ public class GenericBarrierCoreFormationNode extends AbstractCoreFormationNode{
     }
 
     @Override
+    public AbstractFormationNode copy() {
+        return new GenericBarrierCoreFormationNode();
+    }
+
+    @Override
     public void addNodeConnection(String connection, AbstractFormationNode node,AbstractFormationNode receiverNode, String nodeConnection) {
         switch (connection){
             case "canRun":

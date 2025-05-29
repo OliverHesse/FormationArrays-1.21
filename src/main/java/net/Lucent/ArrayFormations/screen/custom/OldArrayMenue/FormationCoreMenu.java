@@ -1,4 +1,4 @@
-package net.Lucent.ArrayFormations.screen.custom;
+package net.Lucent.ArrayFormations.screen.custom.OldArrayMenue;
 
 import net.Lucent.ArrayFormations.block.AbstractClasses.AbstractFormationCoreBlockEntity;
 import net.Lucent.ArrayFormations.block.ModBlocks;
@@ -27,6 +27,8 @@ public class FormationCoreMenu extends AbstractContainerMenu {
     public FormationCoreMenu(int containerId, Inventory inventory, FriendlyByteBuf extraData) {
         this(containerId,inventory,inventory.player.level().getBlockEntity(extraData.readBlockPos()),new SimpleContainerData(1));
     }
+
+
 
     public FormationCoreMenu(int containerId, Inventory inventory, BlockEntity blockEntity,ContainerData dataSlot) {
         super(ModMenuTypes.FORMATION_CORE_MENU.get(),containerId);

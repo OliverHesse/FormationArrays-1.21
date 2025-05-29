@@ -12,11 +12,23 @@ import java.util.Optional;
 //holds a constant value like int,string,bool etc
 public class ConstantInputNode<T> extends AbstractFormationNode {
 
-    public T data;
-
+    public T data = null;
 
     public ConstantInputNode(T data){
         this.data = data;
+    }
+    public ConstantInputNode(){
+        this(null);
+    }
+
+
+    public void setData(T data) {
+        this.data = data;
+    }
+
+    @Override
+    public AbstractFormationNode copy() {
+        return new ConstantInputNode<T>();
     }
 
     @Override

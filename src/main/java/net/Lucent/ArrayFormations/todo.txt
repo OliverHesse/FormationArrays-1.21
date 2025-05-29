@@ -1,4 +1,14 @@
 
+-UI TASKS-
+☐ make a custom screen wrapper that works of relative units.
+☐ make a screen wrapper for "modes" for example input data;
+
+☐ getTotalScaling/scalar is repeated a lot add some sort of function for it.
+☐ rename a bunch of variables to be more descriptive. namely to differentiate if it the cords have been scaled
+☐ i repeat the same code for mouseOver alot so most likely make an abstract Square version of each class
+or just make square default
+☐ change all copy to be cloneable
+☐ make all formation data be loaded from json file. everything from data to the position of connection sockets
 -current task-
 ☐ implement datamaps for formation cores
 
